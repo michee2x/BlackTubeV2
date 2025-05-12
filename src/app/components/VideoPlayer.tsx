@@ -1,7 +1,14 @@
-export default function VideoPlayer() {
+"use client"
+
+import ReactPlayer from "react-player";
+
+export default function VideoPlayer({ url }: { url: string }) {
   return (
-    <div className="w-full aspect-video bg-gray-800 mb-4">
-      <p className="text-center pt-20">[Video Player Placeholder]</p>
-    </div>
-  )
+    <ReactPlayer
+      controls
+      width="100%"
+      height="100%"
+      url="https://youtu.be/NMrtK1-d_gg?si=rbL12jYPdrRLZ10N"
+    />
+  );
 }

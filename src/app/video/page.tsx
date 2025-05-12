@@ -16,13 +16,15 @@ import {
   FaEllipsisH,
 } from "react-icons/fa";
 import Image from "next/image";
+import { MostPopularVideos } from "../Constants";
+import { VideoItems } from "@/types";
+import { FormatViews } from "@/utils/FormatViews";
+import { TimeAgo } from "@/utils/TimeAgo";
 
-function VideoHeader() {
+function VideoHeader({ i }: { i: VideoItems }) {
   return (
     <div className="text-white geistsans p-4 max-w-5xl mx-auto">
-      <h1 className="text-xl  font-bold mb-6">
-        Old Man Powerlifter At Muscle Beach | Anatoly GYM PRANK
-      </h1>
+      <h1 className="text-xl  font-bold mb-6">{i.snippet.title}</h1>
 
       <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
         {/* Channel Info */}
@@ -37,8 +39,8 @@ function VideoHeader() {
             />
           </div>
           <div>
-            <p className="font-semibold flex items-center gap-1">
-              ANATOLY <span className="text-blue-500">✔</span>
+            <p className="font-semibold text-[13px] flex items-center gap-1">
+              {i.snippet.channelTitle} <span className="text-blue-500">✔</span>
             </p>
             <p className="text-sm text-gray-400">8.13M subscribers</p>
           </div>
@@ -50,10 +52,8 @@ function VideoHeader() {
         {/* Action Buttons */}
         <div className="flex items-center gap-2 text-sm">
           <button className="flex items-center gap-1 bg-gray-400/20 px-3 py-1 rounded hover:bg-gray-700">
-            <FaThumbsUp /> <span>441K</span>
-          </button>
-          <button className="bg-gray-400/20 p-2 rounded hover:bg-gray-700">
-            <FaThumbsDown />
+            <FaThumbsUp />{" "}
+            <span>{FormatViews(i.statistics.likeCount.toString())}</span>
           </button>
           <button className="flex items-center gap-1 bg-gray-400/20 px-3 py-1 rounded hover:bg-gray-700">
             <FaShare /> Share
@@ -70,8 +70,10 @@ function VideoHeader() {
       {/* Metadata and Description */}
       <div className="bg-[#272727] p-4 rounded-md text-sm space-y-2">
         <p className="text-white font-semibold">
-          31M views{" "}
-          <span className="text-gray-400 font-normal">9 months ago</span>{" "}
+          {FormatViews(i.statistics.viewCount)} views{" "}
+          <span className="text-gray-400 font-normal">
+            {TimeAgo(i.snippet.publishedAt)}
+          </span>{" "}
           <span className="text-blue-400">#anatoly #gymprank #prank</span>
         </p>
         <p>
@@ -124,12 +126,13 @@ function VideoHeader() {
 }
 
 export default function Page() {
+  const video: VideoItems = MostPopularVideos.items[0];
   return (
     <>
-      <div className="flex geistsans bg-black flex-col pr-12 w-full lg:flex-row gap-4">
+      <div className="flex geistsans bg-black flex-col lg:pr-12 w-full lg:flex-row gap-4">
         <div className="flex-1">
-          <VideoPlayer />
-          <VideoHeader />
+          <VideoPlayer url="" />
+          <VideoHeader i={video} />
           {/* <ActionButtons />
           <ChannelInfo /> */}
           <CommentSection />

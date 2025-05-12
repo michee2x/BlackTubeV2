@@ -8,7 +8,7 @@ const comments = [
 
 export default function CommentSection() {
   return (
-    <div className="mt-4">
+    <div className="mt-4 p-4">
       <h2 className="text-lg font-semibold mb-2">561 Comments</h2>
       {comments.map((c, i) => (
         <Comment key={i} {...c} />

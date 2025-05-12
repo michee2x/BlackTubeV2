@@ -2,7 +2,7 @@ import React from "react";
 
 const Shorts = ({ length }: { length?: number }) => {
   return (
-    <section className="p-4 w-full bg-black h-auto border-t border-[#303030]">
+    <section className="lg:p-4 w-full bg-black h-auto border-t border-[#303030]">
       <h2 className="text-lg font-bold mb-4 flex items-center">
         <span className="text-white mr-2">Shorts</span>
       </h2>

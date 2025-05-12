@@ -13,9 +13,9 @@ export function FormatViews(countStr: string): string {
   for (const [value, symbol] of units) {
     if (count >= value) {
       const formatted = (count / value).toFixed(1).replace(/\.0$/, "");
-      return `${formatted}${symbol} views`;
+      return `${formatted}${symbol}`;
     }
   }
 
-  return `${count} views`;
+  return `${count}`;
 }
