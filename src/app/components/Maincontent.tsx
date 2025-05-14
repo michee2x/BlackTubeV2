@@ -17,8 +17,8 @@ const Maincontent = () => {
   const { showSideBar } = useSideBarContext();
   return (
     <main
-      className={`p-1 lg:mt-[1rem] h-auto w-full bg-black ${
-        !showSideBar ? "lg:grid-cols-4 pl-[1rem]" : "lg:pl-[4rem]"
+      className={`lg:mt-[1rem] h-auto w-full bg-black ${
+        !showSideBar ? "lg:grid-cols-4 lg:pl-[1rem]" : "lg:pl-[4rem]"
       } grid grid-cols-1 sm:grid-cols-2 lg:justify-between md:grid-cols-3`}
     >
       {/* Video Card Component */}
@@ -27,8 +27,8 @@ const Maincontent = () => {
           href={"/video"}
           key={index}
           className={`flex flex-1 lg:flex-0 ${
-            !showSideBar ? "w-[90%]" : ""
-          } py-3 border-b-[.2px] border-gray-900 flex-col`}
+            !showSideBar ? "lg:w-[90%]" : ""
+          } py-3 px-1 border-b-[.2px] border-gray-700 flex-col`}
         >
           <div className="flex w-full h-auto gap-2">
             <div className="w-10 h-10 relative overflow-hidden bg-gray-600 rounded-full flex-shrink-0">
@@ -42,15 +42,15 @@ const Maincontent = () => {
               )}
             </div>
             <div className="flex-1 h-auto">
-              <p className="text-[11px] font-mono flex items-center">
+              <p className="text-[11px] font-medium font-mono flex items-center">
                 {`${i.snippet.channelTitle} `}
-                <p className="text-gray-500 geistsans pl-1">
+                <p className="text-gray-400 font-normal geistsans pl-1">
                   {" "}
                   {`• ${TimeAgo(i.snippet.publishedAt)}`}
                 </p>
               </p>
               {/* Video Title */}
-              <h3 className="text-[11px] mt-1 text-gray-200">
+              <h3 className="text-[11px] font-medium mt-1 text-gray-200">
                 {i.snippet.title}
               </h3>
             </div>
@@ -80,7 +80,7 @@ const Maincontent = () => {
               }}
               className="flex"
             >
-              <div className="flex-1 pr-1.5 flex justify-between font-extralight items-center">
+              <div className="flex-1 pr-1.5 flex justify-between items-center">
                 {/* Views and Upload Time */}
                 <p className="text-[10.3px] items-center gap-[.2px] flex text-gray-400">
                   <FaRegComment className="text-[16px] font-extralight" />

@@ -11,7 +11,7 @@ const Navbar = () => {
   const { setShowSearchBar } = useSearchContext();
   const { showSideBar, setShowSideBar } = useSideBarContext();
   return (
-    <header className="sticky pr-5 top-0 bg-black z-10 border-b border-[#303030] py-2 flex items-center justify-between">
+    <header className="sticky pr-5 top-0 bg-black z-[9000] border-b border-[#303030] py-2 flex items-center justify-between">
       {/* Left Section: Logo and Search */}
       <div className="min-w-14 h-full flex items-center justify-center">
         <div className="w-16 ml-2 h-full flex items-center justify-center">
@@ -23,7 +23,7 @@ const Navbar = () => {
           />
           <IoIosArrowDown
             onClick={() => setShowSideBar(false)}
-            className={`w-8 h-8s ${
+            className={`text-3xl ${
               showSideBar ? "block" : "hidden"
             } text-gray-400 cursor-pointer`}
           />
@@ -54,10 +54,10 @@ const Navbar = () => {
         >
           <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
         </svg>
-        <div className="w-8 h-8 lg:flex hidden bg-gray-600 rounded-full"></div>
+        <div className="w-10 h-10 lg:flex hidden bg-gray-600 rounded-full"></div>
         <svg
           onClick={() => setShowSearchBar(true)}
-          className="w-5 h-5 lg:hidden text-gray-400"
+          className="w-8 h-8 lg:hidden text-gray-400"
           fill="currentColor"
           viewBox="0 0 24 24"
         >

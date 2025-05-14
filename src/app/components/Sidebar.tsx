@@ -23,7 +23,9 @@ const Menu = () => {
           className="flex flex-col items-center space-y-1 cursor-pointer hover:bg-gray-800 p-2 rounded-lg transition"
         >
           {item.icon}
-          <span className="text-[10px]">{item.label}</span>
+          <span className="text-[10px] font-medium font-mono">
+            {item.label}
+          </span>
         </div>
       ))}
     </div>
@@ -38,7 +40,7 @@ export default function Sidebar() {
       className={`lg:w-[6%] w-screen transition-transform ease-in-out duration-300 ${
         !showSideBar ? "translate-y-full" : "-translate-x-0"
       }
-      } z-[3000] fixed bg-black top-14 border-r border-[#303030] lg:flex flex-col items-center py-4 h-screen`}
+      } z-[3000] fixed bg-black pt-16 top-0 lg:top-14 border-r border-[#303030] lg:flex flex-col items-center lg:py-4 h-screen`}
     >
       <Menu />
     </aside>
