@@ -11,7 +11,7 @@ const Search = () => {
     <div
       className={`w-screen ${
         showSearchBar ? "block" : "hidden"
-      } min-h-screen fixed top-0 right-0 left-0 z-[5000] ${
+      } min-h-screen fixed top-0 right-0 left-0 z-[10000] ${
         search ? "bg-black" : "bg-gray-950/60"
       }`}
     >
