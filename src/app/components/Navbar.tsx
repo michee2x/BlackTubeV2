@@ -1,14 +1,32 @@
+"use client";
+
 import React from "react";
 import { IoMenuOutline } from "react-icons/io5";
 import YouTubeLogo from "./Youtubelogo";
+import { useSearchContext } from "@/Context/SearchContext";
+import { useSideBarContext } from "@/Context/SideBarContext";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Navbar = () => {
+  const { setShowSearchBar } = useSearchContext();
+  const { showSideBar, setShowSideBar } = useSideBarContext();
   return (
     <header className="sticky pr-5 top-0 bg-black z-10 border-b border-[#303030] py-2 flex items-center justify-between">
       {/* Left Section: Logo and Search */}
       <div className="min-w-14 h-full flex items-center justify-center">
         <div className="w-16 ml-2 h-full flex items-center justify-center">
-          <IoMenuOutline className="w-8 h-8 text-gray-400 cursor-pointer" />
+          <IoMenuOutline
+            onClick={() => setShowSideBar(true)}
+            className={`w-8 h-8 ${
+              !showSideBar ? "block" : "hidden"
+            } text-gray-400 cursor-pointer`}
+          />
+          <IoIosArrowDown
+            onClick={() => setShowSideBar(false)}
+            className={`w-8 h-8s ${
+              showSideBar ? "block" : "hidden"
+            } text-gray-400 cursor-pointer`}
+          />
         </div>
         <YouTubeLogo />
       </div>
@@ -38,6 +56,7 @@ const Navbar = () => {
         </svg>
         <div className="w-8 h-8 lg:flex hidden bg-gray-600 rounded-full"></div>
         <svg
+          onClick={() => setShowSearchBar(true)}
           className="w-5 h-5 lg:hidden text-gray-400"
           fill="currentColor"
           viewBox="0 0 24 24"

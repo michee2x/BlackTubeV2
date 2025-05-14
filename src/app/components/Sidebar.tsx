@@ -1,11 +1,13 @@
 "use client";
 
+import { useSideBarContext } from "@/Context/SideBarContext";
+import { useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { BiVideoPlus } from "react-icons/bi";
 import { CiUser } from "react-icons/ci";
 import { MdSubscriptions } from "react-icons/md";
 
-export default function Sidebar() {
+const Menu = () => {
   const menu = [
     { icon: <AiFillHome size={24} />, label: "Home" },
     { icon: <BiVideoPlus size={24} />, label: "Shorts" },
@@ -25,5 +27,20 @@ export default function Sidebar() {
         </div>
       ))}
     </div>
+  );
+};
+
+export default function Sidebar() {
+  const { showSideBar, setShowSideBar } = useSideBarContext();
+
+  return (
+    <aside
+      className={`lg:w-[6%] w-screen transition-transform ease-in-out duration-300 ${
+        !showSideBar ? "translate-y-full" : "-translate-x-0"
+      }
+      } z-[3000] fixed bg-black top-14 border-r border-[#303030] lg:flex flex-col items-center py-4 h-screen`}
+    >
+      <Menu />
+    </aside>
   );
 }

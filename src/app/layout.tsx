@@ -6,6 +6,8 @@ import Sidebar from "./components/Sidebar";
 import NavTabs from "./components/NavTabs";
 import Maincontent from "./components/Maincontent";
 import Shorts from "./components/Shorts";
+import { Providers } from "./Providers";
+import Content from "./components/Content";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,22 +34,20 @@ export default function RootLayout({
       <body
         className={` max-w-screen hide-scrollbar geistsans bg-black h-auto ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="min-h-screen w-full bg-black text-white font-roboto">
-          {/* Header Section */}
-          <Navbar />
+        <Providers>
+          <div className="min-h-screen w-full bg-black text-white font-roboto">
+            {/* Header Section */}
+            <Navbar />
 
-          <main className="w-full h-auto flex">
-            {/* Sidebar Section */}
-            <aside className="w-[6%] z-[3000] hidden fixed bg-black top-14 border-r border-[#303030] lg:flex flex-col items-center py-4 h-screen">
+            <main className="w-full h-auto flex">
+              {/* Sidebar Section */}
               <Sidebar />
-            </aside>
 
-            {/* Main Content Section */}
-            <div className="flex-1 max-w-full hide-scrollbar h-auto lg:ml-[6%]">
-              {children}
-            </div>
-          </main>
-        </div>
+              {/* Main Content Section */}
+              <Content children={children} />
+            </main>
+          </div>
+        </Providers>
       </body>
     </html>
   );

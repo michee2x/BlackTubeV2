@@ -15,12 +15,9 @@ const YouTubeLogo = () => {
       </div>
       <div
         style={{ fontFamily: "Tarrget" }}
-        className="text-white Tarrget text-[12px] lg:text-xl font-light relative"
+        className="text-white Tarrget text-[15px] tracking-wider lg:text-xl font-light relative"
       >
         BLACKTUBE
-        <sup className="text-[8px] font-serif mb-[-0.8px] font-normal align-top ml-0.5 text-gray-300">
-          NG
-        </sup>
       </div>
     </div>
   );

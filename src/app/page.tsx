@@ -4,12 +4,15 @@ import Navbar from "./components/Navbar";
 import Maincontent from "./components/Maincontent";
 import Shorts from "./components/Shorts";
 import NavTabs from "./components/NavTabs";
+import Search from "./components/Search";
 
 export default function Home() {
   return (
     <>
       {/* Main Content Section */}
       <div className="flex-1 w-full">
+        {/* Search */}
+        <Search />
         {/* Navigation Tabs */}
         <NavTabs />
 
@@ -21,7 +24,7 @@ export default function Home() {
             backgroundRepeat: "no-repeat",
             zIndex: -1,
           }}
-          className="w-full text-gray-400 flex pb-[80px] justify-end flex-col h-[60vh] bg-gray-900 p-8"
+          className="w-full hidden text-gray-400 pb-[80px] justify-end flex-col h-[60vh] bg-gray-900 p-8"
         >
           <h1 className=" geistsans text-gray-200 text-3xl">
             Narrow And Optimize <br /> How You Watch Videos
