@@ -13,6 +13,7 @@ import {
 type VideoListContextType = {
   VideoList: MostPopularVideosType;
   setVideoList: Dispatch<SetStateAction<MostPopularVideosType>>;
+  fetchVideos: (categoryId?: string) => Promise<void>;
 };
 
 const VideoListTheme = createContext<VideoListContextType | undefined>(
@@ -31,8 +32,25 @@ export const VideoListProvider = ({ children }: { children: ReactNode }) => {
     },
   });
 
+  async function fetchVideos(categoryId: string = "28") {
+    try {
+      const res = await fetch(`/api/youtube/videos?category=${categoryId}`);
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data?.error || "Failed to fetch");
+
+      setVideoList(data); // data.items is the array of video objects
+    } catch (error) {
+      console.error("Error fetching videos:", error);
+    } finally {
+      // setLoading(false);
+    }
+  }
+
   return (
-    <VideoListTheme.Provider value={{ VideoList: videoList, setVideoList }}>
+    <VideoListTheme.Provider
+      value={{ VideoList: videoList, setVideoList, fetchVideos }}
+    >
       {children}
     </VideoListTheme.Provider>
   );

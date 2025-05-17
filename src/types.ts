@@ -6,7 +6,8 @@ export type items = {
         "title": string,
         "assignable": boolean,
         "channelId": string
-      }
+      },
+      "channelInfo"?:ChannelType
 }
 
 
@@ -14,19 +15,47 @@ export type VideoCategory = {
     kind: string;
     etag: string;
     items: items[];
-
 }
 
 export type MostPopularVideosType = {
-    "kind": string,
-    "etag": string,
+    "kind"?: string,
+    "etag"?: string,
     "items":VideoItems[],
     "nextPageToken": string,
     "pageInfo": {
     "totalResults": number,
-    "resultsPerPage": number
+    "resultsPerPage": number,
   }
 }
+
+export type ChannelType = {
+              "title": string,
+              "description": string,
+              "customUrl": string,
+              "publishedAt": string,
+              "thumbnails": {
+                  "default": {
+                      "url": string,
+                      "width": number,
+                      "height": number
+                  },
+                  "medium": {
+                      "url": string,
+                      "width": number,
+                      "height": number
+                  },
+                  "high": {
+                      "url": string,
+                      "width": number,
+                      "height": number
+                  }
+              },
+              "localized": {
+                  "title": string,
+                  "description": string
+              },
+              "country": string
+          }
 
 export type VideoItems  = {
       "kind": string,
@@ -93,5 +122,14 @@ export type VideoItems  = {
         "likeCount": string,
         "favoriteCount": string,
         "commentCount": string
-      }
+      },
+      "status"?: {
+    uploadStatus: string;
+    privacyStatus: string;
+    license: string;
+    embeddable: boolean;
+    publicStatsViewable: boolean;
+    madeForKids: boolean;
+},
+      "channelInfo"?:ChannelType
     }
