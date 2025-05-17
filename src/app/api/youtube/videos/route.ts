@@ -1,7 +1,7 @@
 export async function GET(req: Request) {
   const API_KEY = process.env.API_KEY;
   const regionCode = "US";
-  const maxResults = 25;
+  const maxResults = 15;
 
   const { searchParams } = new URL(req.url);
   const category = searchParams.get("category") || "28"; // default to Tech
