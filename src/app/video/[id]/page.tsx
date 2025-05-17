@@ -1,11 +1,10 @@
-import VideoPlayer from "../components/VideoPlayer";
-import ActionButtons from "../components/ActionButtons";
-import ChannelInfo from "../components/ChannelInfo";
-import CommentSection from "../components/CommentSection";
-import SuggestionsSidebar from "../components/SuggestionsSidebar";
-import Stories from "../components/Stories";
-import Shorts from "../components/Shorts";
-import VideoSuggest from "../components/VideoSuggest";
+"use client";
+
+import VideoPlayer from "@/app/components/VideoPlayer";
+import CommentSection from "@/app/components/CommentSection";
+import SuggestionsSidebar from "@/app/components/SuggestionsSidebar";
+import Shorts from "@/app/components/Shorts";
+import VideoSuggest from "@/app/components/VideoSuggest";
 
 import {
   FaCheckSquare,
@@ -16,15 +15,18 @@ import {
   FaEllipsisH,
 } from "react-icons/fa";
 import Image from "next/image";
-import { MostPopularVideos } from "../Constants";
 import { VideoItems } from "@/types";
 import { FormatViews } from "@/utils/FormatViews";
 import { TimeAgo } from "@/utils/TimeAgo";
+import { useVideoListContext } from "@/Context/VideoListContext";
+import { useParams } from "next/navigation"; // ✅ App Router
 
-function VideoHeader({ i }: { i: VideoItems }) {
+import { useEffect, useState } from "react";
+
+function VideoHeader({ i }: { i: VideoItems | undefined }) {
   return (
     <div className="text-white geistsans p-4 max-w-5xl mx-auto">
-      <h1 className="text-xl  font-bold mb-6">{i.snippet.title}</h1>
+      <h1 className="text-xl  font-bold mb-6">{i?.snippet?.title}</h1>
 
       <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
         {/* Channel Info */}
@@ -40,7 +42,8 @@ function VideoHeader({ i }: { i: VideoItems }) {
           </div>
           <div>
             <p className="font-semibold text-[13px] flex items-center gap-1">
-              {i.snippet.channelTitle} <span className="text-blue-500">✔</span>
+              {i?.snippet?.channelTitle}{" "}
+              <span className="text-blue-500">✔</span>
             </p>
             <p className="text-sm text-gray-400">8.13M subscribers</p>
           </div>
@@ -53,7 +56,10 @@ function VideoHeader({ i }: { i: VideoItems }) {
         <div className="flex items-center gap-2 text-sm">
           <button className="flex items-center gap-1 bg-gray-400/20 px-3 py-1 rounded hover:bg-gray-700">
             <FaThumbsUp />{" "}
-            <span>{FormatViews(i.statistics.likeCount.toString())}</span>
+            <span>
+              {i?.statistics?.likeCount &&
+                FormatViews(i?.statistics?.likeCount?.toString())}
+            </span>
           </button>
           <button className="flex items-center gap-1 bg-gray-400/20 px-3 py-1 rounded hover:bg-gray-700">
             <FaShare /> Share
@@ -70,9 +76,10 @@ function VideoHeader({ i }: { i: VideoItems }) {
       {/* Metadata and Description */}
       <div className="bg-[#272727] p-4 rounded-md text-sm space-y-2">
         <p className="text-white font-semibold">
-          {FormatViews(i.statistics.viewCount)} views{" "}
+          {i?.statistics?.viewCount && FormatViews(i?.statistics?.viewCount)}{" "}
+          views{" "}
           <span className="text-gray-400 font-normal">
-            {TimeAgo(i.snippet.publishedAt)}
+            {i?.snippet?.publishedAt && TimeAgo(i?.snippet?.publishedAt)}
           </span>{" "}
           <span className="text-blue-400">#anatoly #gymprank #prank</span>
         </p>
@@ -126,12 +133,23 @@ function VideoHeader({ i }: { i: VideoItems }) {
 }
 
 export default function Page() {
-  const video: VideoItems = MostPopularVideos.items[0];
+  const [video, setVideo] = useState<VideoItems | undefined>({} as VideoItems);
+  const params = useParams();
+
+  const { VideoList, setVideoList } = useVideoListContext();
+  const id = typeof params?.id === "string" ? params.id : "";
+
+  useEffect(() => {
+    if (VideoList?.items && id) {
+      const foundVideo = VideoList.items.find((i: VideoItems) => i.id === id);
+      setVideo(foundVideo);
+    }
+  }, [VideoList?.items, id]);
   return (
     <>
       <div className="flex geistsans bg-black flex-col lg:pr-12 w-full lg:flex-row gap-4">
         <div className="flex-1">
-          <VideoPlayer url="" />
+          <VideoPlayer url={`https://www.youtube.com/watch?v=${video?.id}`} />
           <VideoHeader i={video} />
           {/* <ActionButtons />
           <ChannelInfo /> */}

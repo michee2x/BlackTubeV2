@@ -30,6 +30,7 @@ const Search = () => {
             placeholder="Search for videos"
           />
           <MdCancel
+            onClick={() => setSearch("")}
             className={`text-xl font-extralight ${
               search ? "block" : "hidden"
             } text-gray-400`}
