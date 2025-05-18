@@ -52,7 +52,7 @@ const Maincontent = () => {
                 )}
               </div>
               <div className="flex-1 h-auto">
-                <p className="text-[14px] font-bold font-medium  flex items-center">
+                <p className="text-[15px] font-bold font-[] font-medium  flex items-center">
                   {`${i.snippet.channelTitle} `}
                   <span className="text-gray-400 font-normal geistsans pl-1">
                     {" "}

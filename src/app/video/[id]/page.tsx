@@ -132,12 +132,7 @@ export default function Page() {
         )}
       </div>
       <aside className="w-full lg:w-1/3">
-        <VideoSuggest
-          title="Suggested Video Title"
-          channel="Random channel"
-          views="10M views"
-          className="my-6"
-        />
+        {video?.id && <VideoSuggest videoId={video.id} />}
         <Shorts length={3} />
         <SuggestionsSidebar />
       </aside>

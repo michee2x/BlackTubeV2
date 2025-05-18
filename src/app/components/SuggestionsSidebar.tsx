@@ -7,11 +7,5 @@ const suggestions = Array.from({ length: 10 }).map((_, i) => ({
 }));
 
 export default function SuggestionsSidebar() {
-  return (
-    <div className="space-y-4 mt-4 lg:mt-0">
-      {suggestions.map((vid, i) => (
-        <VideoSuggest key={i} {...vid} />
-      ))}
-    </div>
-  );
+  return <div className="space-y-4 mt-4 lg:mt-0">s</div>;
 }
