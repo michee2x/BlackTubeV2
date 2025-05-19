@@ -1,12 +1,23 @@
 import React from "react";
 import { BsIncognito } from "react-icons/bs";
+import { CiMenuKebab } from "react-icons/ci";
+import { FiPlus } from "react-icons/fi";
 import { IoMdShareAlt } from "react-icons/io";
 import { IoLogoGoogle } from "react-icons/io5";
 import { MdPerson } from "react-icons/md";
 
+type data = {
+  title: string;
+  channel: string;
+  views: string;
+  time: string;
+  thumbnail: string;
+  duration: string;
+}[];
+
 const page = () => {
   // Simulated data for history items
-  const historyItems = [
+  const historyItems: data = [
     {
       title: "Charli xcx - party 4 u (official video)",
       channel: "Charli xcx",
@@ -34,7 +45,7 @@ const page = () => {
   ];
 
   return (
-    <main className="p-2 text-white bg-black min-h-screen">
+    <main className="pl-2 text-white bg-black min-h-screen">
       <div className="flex flex-col justify-center items-center gap-4 mb-6">
         <img
           className="w-24 rounded-full h-24 object-cover"
@@ -43,7 +54,7 @@ const page = () => {
         />
         <h1>Metryx</h1>
 
-        <nav className="flex w-full hide-scrollbar lg:overflow-x-auto h-auto space-x-2 px-4 py-2 bg-black border-b border-[#303030]">
+        <nav className="flex w-full hide-scrollbar lg:overflow-x-auto h-auto space-x-2 pl-2 py-2 bg-black border-b border-[#303030]">
           {[
             { icon: <MdPerson />, name: "Switch account" },
             { icon: <IoLogoGoogle />, name: "Google saccount" },
@@ -52,7 +63,7 @@ const page = () => {
           ].map((i, idx) => (
             <button
               key={idx}
-              className="px-4 flex items-center gap-1 text-nowrap w-auto h-8 text-[10px] cursor-pointer py-1  border-[.3px] border-gray-600 rounded-full bg-[#424242a1]"
+              className="px-4 flex items-center gap-1 text-nowrap w-auto h-8 text-[10px] cursor-pointer  border-[.3px] border-gray-600 rounded-full bg-[#424242a1]"
             >
               <span className="w-auto text-xl h-full flex items-center">
                 {i.icon}
@@ -64,26 +75,30 @@ const page = () => {
       </div>
       {/* History */}
       <section>
-        <h2 className="text-lg font-semibold mb-4">History</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <h2 className="text-lg w-full h-auto flex justify-between items-center font-semibold mb-4">
+          <span>History</span>
+          <button className="px-4 flex items-center gap-1 text-nowrap w-auto h-8 text-[10px] cursor-pointer py-1  border-[.3px] border-gray-600 rounded-full bg-black hover:bg-[#424242a1]">
+            View all
+          </button>
+        </h2>
+        <div className="flex min-w-full hide-scrollbar lg:overflow-x-auto h-auto space-x-2 py-2 bg-black">
           {historyItems.map((item, i) => (
-            <div key={i} className="relative">
+            <div key={i} className="relative min-w-[45vw] h-40">
               <img
                 src={item.thumbnail}
                 alt={item.title}
-                className="rounded-lg w-full h-48 object-cover"
+                className="rounded-lg w-full h-24 object-cover"
               />
-              <span className="absolute bottom-2 right-2 text-sm bg-black/80 px-1 rounded">
-                {item.duration}
-              </span>
               <div className="mt-2">
-                <h3 className="text-sm font-semibold line-clamp-2">
-                  {item.title}
+                <h3 className="text-sm flex gap-1 justify-between font-semibold line-clamp-2">
+                  {`${item.title.slice(0, 30)}...`}{" "}
+                  <span className="text-xl flex flex-col gap-[2.5px] cursor-pointer">
+                    {[1, 2, 3].map((e) => (
+                      <span className="w-[3px] h-[3px] bg-white rounded-full" />
+                    ))}
+                  </span>
                 </h3>
                 <p className="text-xs text-gray-400">{item.channel}</p>
-                <p className="text-xs text-gray-400">
-                  {item.views} • {item.time}
-                </p>
               </div>
             </div>
           ))}
@@ -91,19 +106,37 @@ const page = () => {
       </section>
 
       {/* Playlists */}
-      <section className="mt-10">
-        <h2 className="text-lg font-semibold mb-4">Playlists</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          <div className="flex flex-col items-start">
-            <div className="bg-gray-700 w-full aspect-video rounded flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-3xl">⋯</div>
-                <div className="text-xs mt-2">No videos</div>
+      <section>
+        <h2 className="text-lg w-full mt-8 h-auto flex justify-between items-center font-semibold mb-4">
+          <span>Playlists</span>
+          <span className="flex items-center gap-2 ">
+            <FiPlus className="text-xl text-white" />
+            <button className="px-4 flex items-center gap-1 text-nowrap w-auto h-8 text-[10px] cursor-pointer py-1  border-[.3px] border-gray-600 rounded-full bg-black hover:bg-[#424242a1]">
+              View all
+            </button>
+          </span>
+        </h2>
+        <div className="flex min-w-full hide-scrollbar lg:overflow-x-auto h-auto space-x-2 py-2 bg-black">
+          {historyItems.map((item, i) => (
+            <div key={i} className="relative min-w-[45vw] h-40">
+              <img
+                src={item.thumbnail}
+                alt={item.title}
+                className="rounded-lg w-full h-24 object-cover"
+              />
+              <div className="mt-2">
+                <h3 className="text-sm flex gap-1 justify-between font-semibold line-clamp-2">
+                  {`${item.title.slice(0, 30)}...`}{" "}
+                  <span className="text-xl flex flex-col gap-[2.5px] cursor-pointer">
+                    {[1, 2, 3].map((e) => (
+                      <span className="w-[3px] h-[3px] bg-white rounded-full" />
+                    ))}
+                  </span>
+                </h3>
+                <p className="text-xs text-gray-400">{item.channel}</p>
               </div>
             </div>
-            <p className="mt-2 text-sm font-medium">Liked videos</p>
-            <p className="text-xs text-blue-500">View full playlist</p>
-          </div>
+          ))}
         </div>
       </section>
 
