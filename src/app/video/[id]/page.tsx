@@ -104,18 +104,24 @@ function VideoHeader({ video }: { video: VideoItems }) {
 export default function Page() {
   const [video, setVideo] = useState<VideoItems | undefined>({} as VideoItems);
   const params = useParams();
-
-  const { VideoList, setVideoList } = useVideoListContext();
   const id = typeof params?.id === "string" ? params.id : "";
 
   useEffect(() => {
-    console.log("HAAAAAAAAAAAAAAAAA", id, VideoList);
-    if (VideoList?.items?.length && id) {
-      const foundVideo = VideoList.items.find((i: VideoItems) => i.id === id);
-      console.log("LOOOOOOOOOOOOOOOOOOOO", id, foundVideo);
-      setVideo(foundVideo);
-    }
-  }, [VideoList?.items?.length, id]);
+    const fetchVideo = async () => {
+      try {
+        const res = await fetch(`/api/youtube/videos/getByIndex?videoId=${id}`);
+        if (!res.ok) {
+          throw new Error("Failed to fetch video");
+        }
+        const data = await res.json();
+        setVideo(data);
+      } catch (error) {
+        console.error("Error fetching video:", error);
+      }
+    };
+
+    fetchVideo();
+  }, []);
   return (
     <div className="flex geistsans bg-black flex-col lg:pr-12 w-full lg:flex-row gap-4">
       <div className="flex-1">
@@ -132,8 +138,8 @@ export default function Page() {
         )}
       </div>
       <aside className="w-full lg:w-1/3">
-        {video?.id && <VideoSuggest videoId={video.id} />}
-        <Shorts length={3} />
+        <VideoSuggest videoId={""} />
+
         <SuggestionsSidebar />
       </aside>
     </div>

@@ -3,6 +3,8 @@
 
 import React, { useEffect, useState } from "react";
 import VideoSuggest from "./VideoSuggest";
+import Image from "next/image";
+import Shorts from "./Shorts";
 
 interface SuggestedVideo {
   className: string;
@@ -21,11 +23,10 @@ const VideoElement = ({
 }: SuggestedVideo) => {
   return (
     <div className={`flex gap-3 ${className}`}>
-      <video
-        src={thumbnail}
-        className="w-32 h-20 rounded-[0.40rem] bg-gray-600"
-      />
-      <div className="flex flex-col">
+      <div className="w-32 h-24 relative rounded-[0.40rem] bg-gray-600">
+        <Image alt={title} src={thumbnail} fill className="object-cover" />
+      </div>
+      <div className="flex flex-1 flex-col">
         <p className="text-sm font-semibold line-clamp-2">{title}</p>
         <p className="text-xs text-gray-400">{channel}</p>
         <p className="text-xs text-gray-400">{views}</p>
@@ -42,7 +43,7 @@ const SuggestedVideos = ({ videoId }: { videoId: string }) => {
     const fetchSuggestions = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/youtube/suggestions?videoId=${videoId}`);
+        const res = await fetch(`/api/youtube/suggestions?categoryId=28`);
         const data = await res.json();
         console.log("HIS IS THE FUCKIN DATA", data);
         setSuggestions(data.videos || []);
@@ -54,24 +55,30 @@ const SuggestedVideos = ({ videoId }: { videoId: string }) => {
     };
 
     fetchSuggestions();
-  }, [videoId]);
+  }, []);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex px-2 flex-col gap-4">
       <h2 className="text-white text-lg font-bold">Suggested Videos</h2>
       {loading ? (
         <p className="text-gray-400">Loading...</p>
       ) : (
-        suggestions.map((video, idx) => (
-          <VideoElement
-            key={idx}
-            title={video.title}
-            channel={video.channel}
-            views={video.views}
-            thumbnail={video.thumbnail}
-            className="text-white"
-          />
-        ))
+        suggestions.map((video, idx) => {
+          return (
+            <>
+              <VideoElement
+                key={idx}
+                title={video.title}
+                channel={video.channel}
+                views={video.views}
+                thumbnail={video.thumbnail}
+                className="text-white"
+              />
+
+              {idx % 4 === 0 && <Shorts length={3} />}
+            </>
+          );
+        })
       )}
     </div>
   );

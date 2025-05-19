@@ -1,45 +1,38 @@
-// app/api/youtube/suggestions/route.ts
+// app/api/youtube/by-category/route.ts
 export async function GET(req: Request) {
-    const API_KEY = process.env.API_KEY;
-    const baseUrl = "https://youtube.googleapis.com/youtube/v3/search";
-  
-    // Extract optional query param `videoId`
-    const { searchParams } = new URL(req.url);
-    const videoId = searchParams.get("videoId") ?? "Ks-_Mh1QhMc"; // fallback video
-  
-    const suggestionsUrl = `${baseUrl}?part=snippet&type=video&relatedToVideoId=wyUpNuNS25g&maxResults=10&key=${API_KEY}`;
-  
-    try {
-      const res = await fetch(suggestionsUrl);
-      const data = await res.json();
+  const API_KEY = process.env.API_KEY;
+  const { searchParams } = new URL(req.url);
+  const categoryId = searchParams.get("categoryId") || "28"; // default to Science & Tech
 
-      console.log("YouTube Suggestions API response:", data);
-  
-      if (!data.items) {
-        return new Response(JSON.stringify({ error: "No suggested videos found" }), {
-          status: 404,
-          headers: { "Content-Type": "application/json" },
-        });
-      }
-  
-      // Enrich with dummy view count (YouTube search API doesn't return views)
-      const videos = data.items.map((item: any) => ({
-        id: item.id.videoId,
-        title: item.snippet.title,
-        channel: item.snippet.channelTitle,
-        thumbnail: item.snippet.thumbnails?.medium?.url,
-        views: `${Math.floor(Math.random() * 1000)}K views`,
-      }));
-  
-      return new Response(JSON.stringify({ videos }), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      });
-    } catch (err) {
-      return new Response(JSON.stringify({ error: "Failed to fetch suggested videos" }), {
-        status: 500,
+  const url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&videoCategoryId=${categoryId}&regionCode=US&maxResults=10&key=${API_KEY}`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (!data.items || data.items.length === 0) {
+      return new Response(JSON.stringify({ error: "No videos found for this category" }), {
+        status: 404,
         headers: { "Content-Type": "application/json" },
       });
     }
+
+    const videos = data.items.map((item: any) => ({
+      title: item.snippet.title,
+      channel: item.snippet.channelTitle,
+      views: `${Math.floor(Math.random() * 900 + 100)}K views`,
+      videoId: item.id,
+      thumbnail: item.snippet.thumbnails.medium.url,
+    }));
+
+    return new Response(JSON.stringify({ videos }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ error: "Internal error", detail: String(error) }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
   }
-  
+}

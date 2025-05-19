@@ -27,10 +27,10 @@ const Shorts = ({ length = 2 }: { length?: number }) => {
     };
 
     fetchShorts();
-  }, [length]);
+  }, []);
 
   return (
-    <section className="lg:p-4 w-full bg-black h-auto border-t border-[#303030]">
+    <section className="lg:p-4 w-full pt-6 px-1 bg-black h-auto border-t border-[#303030]">
       <h2 className="text-lg font-bold mb-4 flex items-center">
         <span className="text-white mr-2">Shorts</span>
       </h2>
@@ -43,10 +43,7 @@ const Shorts = ({ length = 2 }: { length?: number }) => {
       >
         {shorts?.length > 0
           ? shorts.map((short, index) => (
-              <div
-                key={short.id.videoId}
-                className="flex w-full flex-col space-y-2"
-              >
+              <div key={index} className="flex w-full flex-col space-y-2">
                 <div className="w-full h-[13rem] bg-[#303030] rounded-lg overflow-hidden">
                   <img
                     src={short.snippet.thumbnails.medium.url}
