@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useSideBarContext } from "@/Context/SideBarContext";
 import { useVideoListContext } from "@/Context/VideoListContext";
 import * as motion from "motion/react-client";
+import Shorts from "./Shorts";
 
 const Maincontent = () => {
   const { showSideBar } = useSideBarContext();
@@ -34,101 +35,104 @@ const Maincontent = () => {
       {/* Video Card Component */}
       {VideoList?.items?.length > 0 ? (
         VideoList?.items?.map((i, index) => (
-          <Link
-            href={`/video/${i?.id}`}
-            key={index}
-            className={`flex flex-1 lg:flex-0 ${
-              !showSideBar ? "lg:w-[90%]" : ""
-            } py-3 px-1 border-b-[.2px] border-gray-700 flex-col`}
-          >
-            <div className="flex w-full h-auto gap-2">
-              <div className="w-10 skeleton h-10 relative overflow-hidden bg-gray-600 rounded-full flex-shrink-0">
-                {i?.channelInfo?.thumbnails?.default?.url && (
+          <>
+            <Link
+              href={`/video/${i?.id}`}
+              key={index}
+              className={`flex flex-1 lg:flex-0 ${
+                !showSideBar ? "lg:w-[90%]" : ""
+              } py-3 px-1 border-b-[.2px] border-gray-700 flex-col`}
+            >
+              <div className="flex w-full h-auto gap-2">
+                <div className="w-10 skeleton h-10 relative overflow-hidden bg-gray-600 rounded-full flex-shrink-0">
+                  {i?.channelInfo?.thumbnails?.default?.url && (
+                    <Image
+                      src={i?.channelInfo?.thumbnails?.default?.url}
+                      alt={i?.channelInfo?.title}
+                      fill
+                      className="object-cover"
+                    />
+                  )}
+                </div>
+                <div className="flex-1 h-auto">
+                  <p className="text-[15px] font-[] font-medium  flex items-center">
+                    {`${i.snippet.channelTitle} `}
+                    <span className="text-gray-400 font-normal geistsans pl-1">
+                      {" "}
+                      {`• ${TimeAgo(i?.snippet?.publishedAt)}`}
+                    </span>
+                  </p>
+                  {/* Video Title */}
+                  <h3 className="text-[12px] geistsans font-medium mt-1 text-gray-200">
+                    {i?.snippet?.title}
+                  </h3>
+                </div>
+              </div>
+
+              <div className="w-full gap-3 mt-2 flex-col h-auto flex lg:items-start items-end">
+                {/* Thumbnail Placeholder */}
+                <motion.div
+                  whileTap={{ scale: 0.9 }}
+                  style={{
+                    height: i?.snippet?.thumbnails?.medium?.height,
+                    width: i?.snippet?.thumbnails?.medium?.width,
+                  }}
+                  className=" bg-[#303030] skeleton relative rounded-xl"
+                >
                   <Image
-                    src={i?.channelInfo?.thumbnails?.default?.url}
-                    alt={i?.channelInfo?.title}
+                    src={i?.snippet?.thumbnails?.high?.url}
                     fill
-                    className="object-cover"
+                    alt={i.snippet.title}
+                    className="object-cover w-full h-full rounded-xl"
                   />
-                )}
-              </div>
-              <div className="flex-1 h-auto">
-                <p className="text-[15px] font-[] font-medium  flex items-center">
-                  {`${i.snippet.channelTitle} `}
-                  <span className="text-gray-400 font-normal geistsans pl-1">
-                    {" "}
-                    {`• ${TimeAgo(i?.snippet?.publishedAt)}`}
-                  </span>
-                </p>
-                {/* Video Title */}
-                <h3 className="text-[12px] geistsans font-medium mt-1 text-gray-200">
-                  {i?.snippet?.title}
-                </h3>
-              </div>
-            </div>
+                </motion.div>
 
-            <div className="w-full gap-3 mt-2 flex-col h-auto flex lg:items-start items-end">
-              {/* Thumbnail Placeholder */}
-              <motion.div
-                whileTap={{ scale: 0.9 }}
-                style={{
-                  height: i?.snippet?.thumbnails?.medium?.height,
-                  width: i?.snippet?.thumbnails?.medium?.width,
-                }}
-                className=" bg-[#303030] skeleton relative rounded-xl"
-              >
-                <Image
-                  src={i?.snippet?.thumbnails?.high?.url}
-                  fill
-                  alt={i.snippet.title}
-                  className="object-cover w-full h-full rounded-xl"
-                />
-              </motion.div>
-
-              {/* Video Info */}
-              <div
-                style={{
-                  width: i?.snippet?.thumbnails?.medium?.width,
-                }}
-                className="flex"
-              >
-                <div className="flex-1 font-bold pr-1.5 flex justify-between items-center">
-                  {/* Views and Upload Time */}
-                  <p className="text-[10.3px] items-center gap-[.2px] flex text-gray-400">
-                    <FaRegComment className="text-[16px] font-extralight" />
-                    {i?.statistics?.viewCount &&
-                      `${FormatViews(i?.statistics?.viewCount)}`}
-                  </p>
-
-                  <p className="text-[10.3px] items-center gap-[.2px] flex text-gray-400">
-                    <FaRetweet className="text-[16px] font-extralight" />
-                    {`45`}
-                  </p>
-
-                  <p className="text-[10.3px] items-center gap-[.2px] flex text-gray-400">
-                    <FaRegHeart className="text-[16px] font-extralight" />
-                    {`60k`}
-                  </p>
-
-                  <p className="text-[10.3px] items-center gap-[.2px] flex text-gray-400">
-                    <BiBarChart className="text-[16px] font-extralight" />
-                    {i?.statistics?.viewCount &&
-                      `${FormatViews(i?.statistics?.viewCount)}`}
-                  </p>
-
-                  <div className="flex gap-4 items-center">
-                    <p className="text-xs items-center gap-1 flex text-gray-400">
-                      <FiBookmark className="text-[16px] font-extralight" />
+                {/* Video Info */}
+                <div
+                  style={{
+                    width: i?.snippet?.thumbnails?.medium?.width,
+                  }}
+                  className="flex"
+                >
+                  <div className="flex-1 font-normal pr-1.5 flex justify-between items-center">
+                    {/* Views and Upload Time */}
+                    <p className="text-[10.3px] items-center gap-[.2px] flex text-gray-400">
+                      <FaRegComment className="text-[16px] font-extralight" />
+                      {i?.statistics?.viewCount &&
+                        `${FormatViews(i?.statistics?.viewCount)}`}
                     </p>
 
-                    <p className="text-xs items-center gap-1 flex text-gray-400">
-                      <IoShareSocialOutline className="text-[16px] font-extralight" />
+                    <p className="text-[10.3px] items-center gap-[.2px] flex text-gray-400">
+                      <FaRetweet className="text-[16px] font-extralight" />
+                      {`45`}
                     </p>
+
+                    <p className="text-[10.3px] items-center gap-[.2px] flex text-gray-400">
+                      <FaRegHeart className="text-[16px] font-extralight" />
+                      {`60k`}
+                    </p>
+
+                    <p className="text-[10.3px] items-center gap-[.2px] flex text-gray-400">
+                      <BiBarChart className="text-[16px] font-extralight" />
+                      {i?.statistics?.viewCount &&
+                        `${FormatViews(i?.statistics?.viewCount)}`}
+                    </p>
+
+                    <div className="flex gap-4 items-center">
+                      <p className="text-xs items-center gap-1 flex text-gray-400">
+                        <FiBookmark className="text-[16px] font-extralight" />
+                      </p>
+
+                      <p className="text-xs items-center gap-1 flex text-gray-400">
+                        <IoShareSocialOutline className="text-[16px] font-extralight" />
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+            {index % 10 === 0 && <Shorts length={3} />}
+          </>
         ))
       ) : (
         <div className="flex items-center justify-center w-full h-[80vh]">

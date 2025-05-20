@@ -59,7 +59,7 @@ const Shorts = ({ length = 2 }: { length?: number }) => {
           : [1, 2, 3].map((e, i) => {
               return (
                 <div key={i} className="flex w-full flex-col space-y-2">
-                  <div className="w-full h-[13rem] bg-[#303030] rounded-lg overflow-hidden"></div>
+                  <div className="w-full skeleton h-[13rem] rounded-lg overflow-hidden"></div>
                   <h3 className="text-sm font-medium line-clamp-2 text-gray-400">
                     Loading...
                   </h3>
