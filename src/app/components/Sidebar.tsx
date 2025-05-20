@@ -7,6 +7,7 @@ import { AiFillHome } from "react-icons/ai";
 import { BiVideoPlus } from "react-icons/bi";
 import { CiUser } from "react-icons/ci";
 import { MdSubscriptions } from "react-icons/md";
+import * as motion from "motion/react-client";
 
 interface MenuProps {
   setShowSideBar: Dispatch<SetStateAction<boolean>>;
@@ -33,10 +34,13 @@ const Menu = ({ setShowSideBar }: MenuProps) => {
           key={index}
           className="flex flex-col items-center space-y-1 cursor-pointer hover:bg-gray-800 p-2 rounded-lg transition"
         >
-          {item.icon}
-          <span className="text-[10px] font-medium font-mono">
-            {item.label}
-          </span>
+          <motion.div
+            whileTap={{ scale: 0.9 }}
+            className="flex items-center justify-center"
+          >
+            {item.icon}
+          </motion.div>
+          <span className="text-sm">{item.label}</span>
         </Link>
       ))}
     </div>

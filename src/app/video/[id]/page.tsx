@@ -133,7 +133,7 @@ export default function Page() {
           </>
         ) : (
           <div className="flex items-center justify-center h-screen text-white text-lg">
-            Loading...
+            <span className="loading loading-ring loading-xl"></span>
           </div>
         )}
       </div>

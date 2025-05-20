@@ -41,7 +41,12 @@ export default function ShortsPage() {
     if (id) fetchShort();
   }, [id]);
 
-  if (loading) return <div className="text-white p-4">Loading...</div>;
+  if (loading)
+    return (
+      <div className="text-white w-screen h-[80vh] flex items-center justify-center p-4">
+        <span className="loading loading-ring loading-xl"></span>
+      </div>
+    );
   if (!shorts) return <div className="text-white p-4">Short not found.</div>;
 
   return (
@@ -50,7 +55,7 @@ export default function ShortsPage() {
         <div className="aspect-[9/16] w-full overflow-hidden rounded-xl bg-gray-800 shadow-lg">
           <iframe
             className="w-full h-full"
-            src={`https://www.youtube.com/embed/${shorts.id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${shorts.id}`}
+            src={`https://www.youtube.com/embed/${shorts.id}?autoplay=1&controls=0&loop=1&playlist=${shorts.id}`}
             title={shorts.snippet.title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

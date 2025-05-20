@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import VideoSuggest from "./VideoSuggest";
 import Image from "next/image";
 import Shorts from "./Shorts";
+import Link from "next/link";
+import * as motion from "motion/react-client";
 
 interface SuggestedVideo {
   className: string;
@@ -12,6 +14,7 @@ interface SuggestedVideo {
   channel: string;
   views: string;
   thumbnail: string;
+  videoId: string;
 }
 
 const VideoElement = ({
@@ -20,18 +23,22 @@ const VideoElement = ({
   channel,
   className,
   thumbnail,
+  videoId,
 }: SuggestedVideo) => {
   return (
-    <div className={`flex gap-3 ${className}`}>
-      <div className="w-32 h-24 relative rounded-[0.40rem] bg-gray-600">
+    <Link href={`/video/${videoId}`} className={`flex gap-3 ${className}`}>
+      <motion.div
+        whileTap={{ scale: 0.9 }}
+        className="w-32 h-24 relative rounded-[0.40rem] bg-gray-600"
+      >
         <Image alt={title} src={thumbnail} fill className="object-cover" />
-      </div>
+      </motion.div>
       <div className="flex flex-1 flex-col">
         <p className="text-sm font-semibold line-clamp-2">{title}</p>
         <p className="text-xs text-gray-400">{channel}</p>
         <p className="text-xs text-gray-400">{views}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -61,7 +68,7 @@ const SuggestedVideos = ({ videoId }: { videoId: string }) => {
     <div className="flex px-2 flex-col gap-4">
       <h2 className="text-white text-lg font-bold">Suggested Videos</h2>
       {loading ? (
-        <p className="text-gray-400">Loading...</p>
+        <span className="loading loading-ring loading-xl"></span>
       ) : (
         suggestions.map((video, idx) => {
           return (
@@ -73,6 +80,7 @@ const SuggestedVideos = ({ videoId }: { videoId: string }) => {
                 views={video.views}
                 thumbnail={video.thumbnail}
                 className="text-white"
+                videoId={video.videoId}
               />
 
               {idx % 4 === 0 && <Shorts length={3} />}

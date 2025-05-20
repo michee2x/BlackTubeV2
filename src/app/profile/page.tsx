@@ -9,6 +9,7 @@ import { MdMovie, MdOutlineInsertChart, MdPerson } from "react-icons/md";
 import { LiaDownloadSolid } from "react-icons/lia";
 import { FaGraduationCap, FaRegQuestionCircle, FaVideo } from "react-icons/fa";
 import { GoVideo } from "react-icons/go";
+import * as motion from "motion/react-client";
 
 type data = {
   title: string;
@@ -82,7 +83,8 @@ const page = () => {
             { icon: <BsIncognito />, name: "Turn on Incognito" },
             { icon: <IoMdShareAlt />, name: "Share channel" },
           ].map((i, idx) => (
-            <button
+            <motion.button
+              whileTap={{ scale: 0.8 }}
               key={idx}
               className="px-4 flex items-center gap-1 text-nowrap w-auto h-8 text-[10px] cursor-pointer  border-[.3px] border-gray-600 rounded-full bg-[#424242a1]"
             >
@@ -90,7 +92,7 @@ const page = () => {
                 {i.icon}
               </span>{" "}
               <span className="w-auto h-full flex items-center">{i.name}</span>
-            </button>
+            </motion.button>
           ))}
         </nav>
       </div>
