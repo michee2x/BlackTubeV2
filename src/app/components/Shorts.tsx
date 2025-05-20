@@ -34,13 +34,7 @@ const Shorts = ({ length = 2 }: { length?: number }) => {
       <h2 className="text-lg font-bold mb-4 flex items-center">
         <span className="text-white mr-2">Shorts</span>
       </h2>
-      <div
-        className={`${
-          length !== undefined && length > 3
-            ? "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
-            : "flex justify-between gap-1"
-        }`}
-      >
+      <div className="flex w-full hide-scrollbar lg:overflow-x-auto h-auto space-x-2 py-2 bg-black">
         {shorts?.length > 0
           ? shorts.map((short, index) => (
               <div key={index} className="flex w-full flex-col space-y-2">

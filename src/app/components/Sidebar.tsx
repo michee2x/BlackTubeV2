@@ -1,24 +1,35 @@
 "use client";
 
 import { useSideBarContext } from "@/Context/SideBarContext";
-import { useState } from "react";
+import Link from "next/link";
+import { Dispatch, SetStateAction, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { BiVideoPlus } from "react-icons/bi";
 import { CiUser } from "react-icons/ci";
 import { MdSubscriptions } from "react-icons/md";
 
-const Menu = () => {
+interface MenuProps {
+  setShowSideBar: Dispatch<SetStateAction<boolean>>;
+}
+
+const Menu = ({ setShowSideBar }: MenuProps) => {
   const menu = [
-    { icon: <AiFillHome size={24} />, label: "Home" },
-    { icon: <BiVideoPlus size={24} />, label: "Shorts" },
-    { icon: <MdSubscriptions size={24} />, label: "Subscriptions" },
-    { icon: <CiUser size={24} />, label: "You" },
+    { icon: <AiFillHome size={24} />, label: "Home", link: "/" },
+    { icon: <BiVideoPlus size={24} />, label: "Shorts", link: "/shorts" },
+    {
+      icon: <MdSubscriptions size={24} />,
+      label: "Subscriptions",
+      link: "/subscriptions",
+    },
+    { icon: <CiUser size={24} />, label: "You", link: "/profile" },
   ];
 
   return (
     <div className="flex flex-col items-center bg-black text-white py-4 w-full space-y-8">
       {menu.map((item, index) => (
-        <div
+        <Link
+          href={item.link}
+          onClick={() => setShowSideBar(false)}
           key={index}
           className="flex flex-col items-center space-y-1 cursor-pointer hover:bg-gray-800 p-2 rounded-lg transition"
         >
@@ -26,7 +37,7 @@ const Menu = () => {
           <span className="text-[10px] font-medium font-mono">
             {item.label}
           </span>
-        </div>
+        </Link>
       ))}
     </div>
   );
@@ -42,7 +53,7 @@ export default function Sidebar() {
       }
       } z-[3000] fixed bg-black pt-16 top-0 lg:top-14 border-r border-[#303030] lg:flex flex-col items-center lg:py-4 h-screen`}
     >
-      <Menu />
+      <Menu setShowSideBar={setShowSideBar} />
     </aside>
   );
 }

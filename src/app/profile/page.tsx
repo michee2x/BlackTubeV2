@@ -51,12 +51,28 @@ const page = () => {
   return (
     <main className=" text-white bg-black min-h-screen">
       <div className="flex flex-col justify-center items-center gap-4 mb-6">
-        <img
-          className="w-24 rounded-full h-24 object-cover"
-          src="https://i.imgur.com/G7oYvV1.png"
-          alt=""
-        />
-        <h1>Metryx</h1>
+        <div
+          className="w-full relative h-40"
+          style={{
+            backgroundImage: "url('https://i.imgur.com/PXsuopF.jpeg')",
+            backgroundSize: "cover",
+            backgroundPosition: "40% 20%",
+          }}
+        >
+          <span className="text-xl absolute right-5 top-3 flex flex-col gap-[2.5px] cursor-pointer">
+            {[1, 2, 3].map((e) => (
+              <span className="w-[4px] h-[4px] bg-white rounded-full" />
+            ))}
+          </span>
+          <img
+            className="w-24 absolute -bottom-[50%] border-4 border-black -translate-1/2 left-1/2 rounded-full h-24 object-cover"
+            src="https://i.imgur.com/G7oYvV1.png"
+            alt=""
+          />
+        </div>
+        <div className="mt-8">
+          <h1 className="text-gray-400">~ Metryx</h1>
+        </div>
 
         <nav className="flex w-full hide-scrollbar lg:overflow-x-auto h-auto space-x-2 pl-2 py-2 bg-black border-b border-[#303030]">
           {[
@@ -79,7 +95,7 @@ const page = () => {
       </div>
       {/* History */}
       <section className="pl-2">
-        <h2 className="text-lg w-full h-auto flex justify-between items-center font-semibold mb-4">
+        <h2 className="text-lg pr-2 w-full h-auto flex justify-between items-center font-semibold mb-4">
           <span>History</span>
           <button className="px-4 flex items-center gap-1 text-nowrap w-auto h-8 text-[10px] cursor-pointer py-1  border-[.3px] border-gray-600 rounded-full bg-black hover:bg-[#424242a1]">
             View all
@@ -111,7 +127,7 @@ const page = () => {
 
       {/* Playlists */}
       <section className="pl-2">
-        <h2 className="text-lg w-full mt-8 h-auto flex justify-between items-center font-semibold mb-4">
+        <h2 className="text-lg pr-2 w-full mt-8 h-auto flex justify-between items-center font-semibold mb-4">
           <span>Playlists</span>
           <span className="flex items-center gap-2 ">
             <FiPlus className="text-xl text-white" />
