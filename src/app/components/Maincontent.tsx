@@ -13,6 +13,7 @@ import { FiBookmark } from "react-icons/fi";
 import Link from "next/link";
 import { useSideBarContext } from "@/Context/SideBarContext";
 import { useVideoListContext } from "@/Context/VideoListContext";
+import * as motion from "motion/react-client";
 
 const Maincontent = () => {
   const { showSideBar } = useSideBarContext();
@@ -41,7 +42,7 @@ const Maincontent = () => {
             } py-3 px-1 border-b-[.2px] border-gray-700 flex-col`}
           >
             <div className="flex w-full h-auto gap-2">
-              <div className="w-10 h-10 relative overflow-hidden bg-gray-600 rounded-full flex-shrink-0">
+              <div className="w-10 skeleton h-10 relative overflow-hidden bg-gray-600 rounded-full flex-shrink-0">
                 {i?.channelInfo?.thumbnails?.default?.url && (
                   <Image
                     src={i?.channelInfo?.thumbnails?.default?.url}
@@ -68,12 +69,13 @@ const Maincontent = () => {
 
             <div className="w-full gap-3 mt-2 flex-col h-auto flex lg:items-start items-end">
               {/* Thumbnail Placeholder */}
-              <div
+              <motion.div
+                whileTap={{ scale: 0.9 }}
                 style={{
                   height: i?.snippet?.thumbnails?.medium?.height,
                   width: i?.snippet?.thumbnails?.medium?.width,
                 }}
-                className=" bg-[#303030] relative rounded-xl"
+                className=" bg-[#303030] skeleton relative rounded-xl"
               >
                 <Image
                   src={i?.snippet?.thumbnails?.high?.url}
@@ -81,7 +83,7 @@ const Maincontent = () => {
                   alt={i.snippet.title}
                   className="object-cover w-full h-full rounded-xl"
                 />
-              </div>
+              </motion.div>
 
               {/* Video Info */}
               <div

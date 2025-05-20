@@ -25,11 +25,12 @@ export default function ShortsPage() {
         >
           <iframe
             className="w-full h-full"
-            src={`https://www.youtube.com/embed/${video.id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${video.id}`}
+            src={`https://www.youtube.com/embed/${video.id}?autoplay=1&controls=0&loop=1&playlist=${video.id}`}
             title={video.snippet.title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
+
           <div className="absolute bottom-10 left-4 text-left space-y-1">
             <h2 className="text-xl font-bold">{video.snippet.title}</h2>
             <p className="text-sm text-gray-300">
