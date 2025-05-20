@@ -30,7 +30,7 @@ const historyItems = [
   },
 ];
 
-export default function Subscriptions() {
+const page = () => {
   return (
     <div className="min-h-screen">
       <div className="flex w-full hide-scrollbar lg:overflow-x-auto h-auto space-x-4 px-4 py-2 bg-black border-b border-[#303030]">
@@ -153,4 +153,6 @@ export default function Subscriptions() {
       </main>
     </div>
   );
-}
+};
+
+export default page;
