@@ -19,7 +19,7 @@ const Menu = ({ setShowSideBar }: MenuProps) => {
     {
       icon: <MdSubscriptions size={24} />,
       label: "Subscriptions",
-      link: "/subscriptions",
+      link: "/subscription",
     },
     { icon: <CiUser size={24} />, label: "You", link: "/profile" },
   ];
