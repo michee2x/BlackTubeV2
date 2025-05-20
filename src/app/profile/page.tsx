@@ -55,8 +55,9 @@ const page = () => {
           className="w-full relative h-40"
           style={{
             backgroundImage: "url('https://i.imgur.com/PXsuopF.jpeg')",
-            backgroundSize: "cover",
-            backgroundPosition: "40% 20%",
+            backgroundSize: "150%",
+            backgroundPosition: "60% 20%",
+            backgroundRepeat: "no-repeat",
           }}
         >
           <span className="text-xl absolute right-5 top-3 flex flex-col gap-[2.5px] cursor-pointer">
@@ -65,12 +66,12 @@ const page = () => {
             ))}
           </span>
           <img
-            className="w-24 absolute -bottom-[50%] border-4 border-black -translate-1/2 left-1/2 rounded-full h-24 object-cover"
+            className="w-[7rem] absolute -bottom-[70%] border-4 border-black -translate-1/2 left-1/2 rounded-full h-[7rem] object-cover"
             src="https://i.imgur.com/G7oYvV1.png"
             alt=""
           />
         </div>
-        <div className="mt-8">
+        <div className="mt-12">
           <h1 className="text-gray-400">~ Metryx</h1>
         </div>
 

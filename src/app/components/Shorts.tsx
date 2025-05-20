@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type ShortItem = {
@@ -37,7 +38,11 @@ const Shorts = ({ length = 2 }: { length?: number }) => {
       <div className="flex w-full hide-scrollbar lg:overflow-x-auto h-auto space-x-2 py-2 bg-black">
         {shorts?.length > 0
           ? shorts.map((short, index) => (
-              <div key={index} className="flex w-full flex-col space-y-2">
+              <Link
+                href={`/shorts/${short?.id?.videoId}`}
+                key={index}
+                className="flex w-full flex-col space-y-2"
+              >
                 <div className="w-full h-[13rem] bg-[#303030] rounded-lg overflow-hidden">
                   <img
                     src={short.snippet.thumbnails.medium.url}
@@ -49,7 +54,7 @@ const Shorts = ({ length = 2 }: { length?: number }) => {
                   {short.snippet.title}
                 </h3>
                 <p className="text-xs text-gray-400">Shorts</p>
-              </div>
+              </Link>
             ))
           : [1, 2, 3].map((e, i) => {
               return (

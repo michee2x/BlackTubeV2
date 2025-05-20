@@ -1,15 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoMenuOutline } from "react-icons/io5";
 import YouTubeLogo from "./Youtubelogo";
 import { useSearchContext } from "@/Context/SearchContext";
 import { useSideBarContext } from "@/Context/SideBarContext";
 import { IoIosArrowDown } from "react-icons/io";
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
   const { setShowSearchBar } = useSearchContext();
   const { showSideBar, setShowSideBar } = useSideBarContext();
+  const [canGoBack, setCanGoBack] = useState(false);
+
+  useEffect(() => {
+    // In most browsers, a history length of 1 means it's the first page
+    if (window.history.length > 1) {
+      setCanGoBack(true);
+    }
+  }, []);
   return (
     <header className="sticky pr-5 top-0 bg-black z-[9000] border-b border-[#303030] py-2 flex items-center justify-between">
       {/* Left Section: Logo and Search */}
@@ -47,13 +58,12 @@ const Navbar = () => {
 
       {/* Right Section: Icons */}
       <div className="flex items-center space-x-4">
-        <svg
-          className="w-6 h-6 text-gray-400"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-        </svg>
+        <FaArrowLeftLong
+          onClick={() => router.back()}
+          className={`lg:hidden text-xl ${
+            !canGoBack ? "text-gray-500" : "text-white"
+          }`}
+        />
         <div className="w-10 h-10 lg:flex hidden bg-gray-600 rounded-full"></div>
         <svg
           onClick={() => setShowSearchBar(true)}

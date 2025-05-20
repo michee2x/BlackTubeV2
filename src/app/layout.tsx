@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import { Providers } from "./Providers";
 import Content from "./components/Content";
+import Search from "./components/Search";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,7 +42,11 @@ export default function RootLayout({
               <Sidebar />
 
               {/* Main Content Section */}
-              <Content children={children} />
+              <Content>
+                {/* Search */}
+                <Search />
+                {children}
+              </Content>
             </main>
           </div>
         </Providers>

@@ -11,8 +11,6 @@ export default function Home() {
     <>
       {/* Main Content Section */}
       <div className="flex-1 w-full">
-        {/* Search */}
-        <Search />
         {/* Navigation Tabs */}
         <NavTabs />
 

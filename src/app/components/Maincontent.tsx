@@ -52,7 +52,7 @@ const Maincontent = () => {
                 )}
               </div>
               <div className="flex-1 h-auto">
-                <p className="text-[15px] font-bold font-[] font-medium  flex items-center">
+                <p className="text-[15px] font-[] font-medium  flex items-center">
                   {`${i.snippet.channelTitle} `}
                   <span className="text-gray-400 font-normal geistsans pl-1">
                     {" "}
@@ -60,7 +60,7 @@ const Maincontent = () => {
                   </span>
                 </p>
                 {/* Video Title */}
-                <h3 className="text-[11px] font-medium mt-1 text-gray-200">
+                <h3 className="text-[12px] geistsans font-medium mt-1 text-gray-200">
                   {i?.snippet?.title}
                 </h3>
               </div>
@@ -90,7 +90,7 @@ const Maincontent = () => {
                 }}
                 className="flex"
               >
-                <div className="flex-1 pr-1.5 flex justify-between items-center">
+                <div className="flex-1 font-bold pr-1.5 flex justify-between items-center">
                   {/* Views and Upload Time */}
                   <p className="text-[10.3px] items-center gap-[.2px] flex text-gray-400">
                     <FaRegComment className="text-[16px] font-extralight" />
@@ -129,8 +129,8 @@ const Maincontent = () => {
           </Link>
         ))
       ) : (
-        <div className="flex items-center justify-center w-full h-full">
-          <p className="text-gray-400">Loading...</p>
+        <div className="flex items-center justify-center w-full h-[80vh]">
+          <span className="loading loading-ring loading-xl"></span>
         </div>
       )}
     </main>

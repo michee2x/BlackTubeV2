@@ -12,7 +12,7 @@ const NavTabs = () => {
         <button
           key={idx}
           onClick={() => fetchVideos(i.id)}
-          className="px-4 text-nowrap w-auto h-8 text-[10px] font-mono cursor-pointer py-1 bg-black border-[.3px] border-gray-600 rounded-full hover:bg-[#424242a1] transition"
+          className="px-4 text-nowrap w-auto h-8 font-bold text-[10px] font-mono cursor-pointer py-1 bg-black border-[1px] border-gray-600 rounded-full hover:bg-[#424242a1] transition"
         >
           {i.snippet.title}
         </button>
