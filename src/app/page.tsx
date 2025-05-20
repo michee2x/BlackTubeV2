@@ -42,5 +42,3 @@ export default function Home() {
     </>
   );
 }
-
-//write a nextjs and tailwindcss code for the youtube design above. let it be exact pls. fonts and every thing. except images. let all code be in a single file. And document each section
