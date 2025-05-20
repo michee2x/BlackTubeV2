@@ -64,7 +64,13 @@ const Navbar = () => {
             !canGoBack ? "text-gray-500" : "text-white"
           }`}
         />
-        <div className="w-10 h-10 lg:flex hidden bg-gray-600 rounded-full"></div>
+        <div className="w-10 h-10 lg:flex hidden overflow-hidden bg-gray-600 rounded-full">
+          <img
+            className="w-full h-full rounded-full  object-cover"
+            src="https://i.imgur.com/G7oYvV1.png"
+            alt=""
+          />
+        </div>
         <svg
           onClick={() => setShowSearchBar(true)}
           className="w-8 h-8 lg:hidden text-gray-400"
