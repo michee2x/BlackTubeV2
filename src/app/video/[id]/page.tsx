@@ -37,9 +37,9 @@ function VideoHeader({ video }: { video: VideoItems }) {
           <div className="w-10 h-10 relative rounded-full bg-gray-500 overflow-hidden">
             {channelInfo?.thumbnails?.default?.url && (
               <Image
-                src={channelInfo.thumbnails.default.url}
+                src={channelInfo?.thumbnails?.default?.url}
                 fill
-                alt={`${channelInfo.title} Channel`}
+                alt={`${channelInfo?.title} Channel`}
                 className="rounded-full object-cover"
               />
             )}
@@ -79,7 +79,7 @@ function VideoHeader({ video }: { video: VideoItems }) {
 
       {/* Metadata and Description */}
       {snippet?.description && (
-        <VideoDescription description={snippet.description} />
+        <VideoDescription description={snippet?.description} />
       )}
 
       {/* Comment Section Header */}
@@ -127,7 +127,7 @@ export default function Page() {
       <div className="flex-1">
         {video ? (
           <>
-            <VideoPlayer url={video.id} />
+            <VideoPlayer url={video?.id} />
             <VideoHeader video={video} />
             <CommentSection videoId={id} />
           </>

@@ -34,7 +34,7 @@ export default function CommentSection({ videoId }: { videoId: string }) {
   return (
     <div className="space-y-4 px-3 mt-6">
       <p className="text-gray-300 font-medium">
-        Showing {comments.length} of {total} comments:
+        Showing {comments?.length && comments.length} of {total} comments:
       </p>
       <div className="flex flex-col gap-1">
         {comments.map((c, i) => (
